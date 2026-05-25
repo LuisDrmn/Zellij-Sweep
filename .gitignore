@@ -4,5 +4,7 @@ Derived/
 *.xcworkspace/
 .tuist-cache/
 .build/
+build/
+RELEASE.md
 *.xcuserstate
 xcuserdata/
