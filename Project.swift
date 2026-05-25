@@ -24,6 +24,7 @@ let project = Project(
             infoPlist: .extendingDefault(
                 with: [
                     "CFBundleDisplayName": "Zellij-Sweep",
+                    "LSApplicationCategoryType": "public.app-category.utilities",
                     "LSUIElement": true,
                     "NSHumanReadableCopyright": "Zellij-Sweep © [Jean-Louis Darmon]",
                 ]
