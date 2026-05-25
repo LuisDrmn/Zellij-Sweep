@@ -39,14 +39,35 @@ struct ZellijMenuView: View {
 
             Spacer()
 
-            Button {
-                Task { await store.refresh() }
+            Button(role: .destructive) {
+                Task { await store.forceDeleteUnpinnedSessions() }
             } label: {
-                Image(systemName: "arrow.clockwise")
+                Text("Force Delete All")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.white)
             }
             .buttonStyle(.borderless)
-            .disabled(store.isRefreshing)
-            .help("Refresh sessions")
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(.red, in: RoundedRectangle(cornerRadius: 5))
+            .disabled(!hasUnpinnedSessions || store.isRefreshing || !store.deletingSessionIDs.isEmpty)
+            .opacity((!hasUnpinnedSessions || store.isRefreshing || !store.deletingSessionIDs.isEmpty) ? 0.5 : 1)
+            .help("Force delete every unpinned session")
+
+
+            if store.isRefreshing {
+                ProgressView()
+                    .controlSize(.small)
+            } else {
+                Button {
+                    Task { await store.refresh() }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .buttonStyle(.borderless)
+                .disabled(store.isRefreshing)
+                .help("Refresh sessions")
+            }
         }
     }
 
@@ -91,32 +112,18 @@ struct ZellijMenuView: View {
 
     private var footer: some View {
         HStack {
+            SettingsLink {
+                Label("", systemImage: "gearshape")
+            }
+            .buttonStyle(.plain)
+            .labelsHidden()
+
+            Spacer()
+
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }
             .keyboardShortcut("q")
-
-            Spacer()
-
-            if store.isRefreshing {
-                ProgressView()
-                    .controlSize(.small)
-            }
-
-            Button(role: .destructive) {
-                Task { await store.forceDeleteUnpinnedSessions() }
-            } label: {
-                Text("Force Delete All")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.white)
-            }
-            .buttonStyle(.borderless)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(.red, in: RoundedRectangle(cornerRadius: 5))
-            .disabled(!hasUnpinnedSessions || store.isRefreshing || !store.deletingSessionIDs.isEmpty)
-            .opacity((!hasUnpinnedSessions || store.isRefreshing || !store.deletingSessionIDs.isEmpty) ? 0.5 : 1)
-            .help("Force delete every unpinned session")
         }
     }
 
