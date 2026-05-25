@@ -7,8 +7,8 @@ let project = Project(
     ),
     settings: .settings(
         base: [
-            "CURRENT_PROJECT_VERSION": "1",
-            "MARKETING_VERSION": "1.0",
+            "CURRENT_PROJECT_VERSION": "2",
+            "MARKETING_VERSION": "1.0.1",
             "MACOSX_DEPLOYMENT_TARGET": "14.0",
             "SWIFT_VERSION": "6.0",
             "PRODUCT_NAME": "Zellij-Sweep",
