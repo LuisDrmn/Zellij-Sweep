@@ -11,7 +11,14 @@ struct ZellijSweepApp: App {
                     await store.refresh()
                 }
         } label: {
-            Label("Zellij-Sweep", systemImage: "rectangle.stack.badge.minus")
+            HStack(spacing: 4) {
+                Image(systemName: "rectangle.stack.badge.minus")
+                Text("\(store.sessions.count)")
+            }
+            .accessibilityLabel("Zellij-Sweep, \(store.sessions.count) sessions")
+            .task {
+                await store.refresh()
+            }
         }
         .menuBarExtraStyle(.window)
     }
