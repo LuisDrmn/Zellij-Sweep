@@ -72,17 +72,10 @@ struct ZellijSettingsView: View {
     }
 
     private var appIcon: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(.quaternary)
-                .frame(width: 88, height: 88)
-                .shadow(color: .black.opacity(0.18), radius: 8, y: 4)
-
-            Image(systemName: "rectangle.stack.badge.minus")
-                .font(.system(size: 42, weight: .semibold))
-                .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(.blue)
-        }
+        Image(nsImage: NSApplication.shared.applicationIconImage)
+            .resizable()
+            .frame(width: 88, height: 88)
+            .shadow(color: .black.opacity(0.18), radius: 8, y: 4)
     }
 
     private var appVersion: String {

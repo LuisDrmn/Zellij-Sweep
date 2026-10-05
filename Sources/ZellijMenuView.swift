@@ -22,6 +22,7 @@ struct ZellijMenuView: View {
         }
         .padding(14)
         .frame(width: 360)
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private var header: some View {
@@ -99,7 +100,9 @@ struct ZellijMenuView: View {
                     }
                 }
             }
-            .frame(maxHeight: 320)
+            // A window-style MenuBarExtra sizes itself from its content. A
+            // maximum alone lets this lazy scroll view collapse to zero height.
+            .frame(height: 320)
         } else {
             ContentUnavailableView(
                 "No Sessions",

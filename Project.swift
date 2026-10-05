@@ -7,11 +7,13 @@ let project = Project(
     ),
     settings: .settings(
         base: [
-            "CURRENT_PROJECT_VERSION": "2",
-            "MARKETING_VERSION": "1.0.1",
+            "CURRENT_PROJECT_VERSION": "3",
+            "MARKETING_VERSION": "1.0.2",
             "MACOSX_DEPLOYMENT_TARGET": "14.0",
             "SWIFT_VERSION": "6.0",
             "PRODUCT_NAME": "Zellij-Sweep",
+            "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+            "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         ]
     ),
     targets: [
@@ -30,7 +32,14 @@ let project = Project(
                 ]
             ),
             sources: ["Sources/**"],
-            resources: [],
+            resources: [
+                .glob(
+                    pattern: "Resources/**",
+                    excluding: [
+                        "Resources/AppIcon.icon/**",
+                    ]
+                ),
+            ],
             dependencies: []
         ),
     ],
